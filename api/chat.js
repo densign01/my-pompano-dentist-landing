@@ -1,6 +1,86 @@
+// --- CORS Origin Allowlist ---
+function isAllowedOrigin(origin) {
+  if (!origin) return false;
+
+  // If ALLOWED_ORIGIN env var is set, use it
+  const envOrigin = process.env.ALLOWED_ORIGIN;
+  if (envOrigin && origin === envOrigin) return true;
+
+  // Allow localhost for dev
+  if (/^https?:\/\/localhost(:\d+)?$/.test(origin)) return true;
+
+  // Allow Vercel deployment domains
+  if (/^https:\/\/my-pompano-dentist-landing[-a-z0-9]*\.vercel\.app$/.test(origin)) return true;
+
+  return false;
+}
+
+// --- In-memory Rate Limiter (sliding window, resets on cold start) ---
+const rateLimitMap = new Map();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const RATE_LIMIT_MAX = 10; // max requests per window
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  let record = rateLimitMap.get(ip);
+
+  if (!record) {
+    record = { timestamps: [] };
+    rateLimitMap.set(ip, record);
+  }
+
+  // Remove timestamps outside the sliding window
+  record.timestamps = record.timestamps.filter(t => now - t < RATE_LIMIT_WINDOW_MS);
+
+  if (record.timestamps.length >= RATE_LIMIT_MAX) {
+    return true;
+  }
+
+  record.timestamps.push(now);
+  return false;
+}
+
+// --- Input Validation ---
+function validateMessages(messages) {
+  if (!messages || !Array.isArray(messages) || messages.length === 0) {
+    return 'Messages array is required';
+  }
+
+  if (messages.length > 50) {
+    return 'Too many messages. Maximum 50 messages allowed.';
+  }
+
+  const allowedRoles = ['user', 'assistant'];
+
+  for (let i = 0; i < messages.length; i++) {
+    const msg = messages[i];
+
+    if (!msg || typeof msg !== 'object') {
+      return `Message at index ${i} must be an object.`;
+    }
+
+    if (typeof msg.role !== 'string' || !allowedRoles.includes(msg.role)) {
+      return `Message at index ${i} has an invalid role. Must be "user" or "assistant".`;
+    }
+
+    if (typeof msg.content !== 'string') {
+      return `Message at index ${i} must have a string content field.`;
+    }
+
+    if (msg.content.length > 2000) {
+      return `Message at index ${i} exceeds the 2000 character limit.`;
+    }
+  }
+
+  return null; // valid
+}
+
 export default async function handler(req, res) {
-  // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  // CORS headers — only allow known origins
+  const origin = req.headers.origin;
+  if (isAllowedOrigin(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -12,10 +92,18 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // Rate limiting
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress;
+  if (isRateLimited(ip)) {
+    return res.status(429).json({ error: 'Too many requests. Please try again in a minute.' });
+  }
+
   const { messages } = req.body || {};
 
-  if (!messages || !Array.isArray(messages) || messages.length === 0) {
-    return res.status(400).json({ error: 'Messages array is required' });
+  // Input validation
+  const validationError = validateMessages(messages);
+  if (validationError) {
+    return res.status(400).json({ error: validationError });
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
