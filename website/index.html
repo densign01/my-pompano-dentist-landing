@@ -335,6 +335,12 @@
       position: relative;
       overflow: hidden;
     }
+    .doctor-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
     .doctor-photo .credential-badge {
       position: absolute;
       bottom: 20px;
@@ -570,6 +576,197 @@
       .hero-ctas { flex-direction: column; }
       .offer-card { padding: 28px 24px; }
     }
+
+    /* ── Chat Widget ── */
+    .mpd-chat-bubble {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 60px;
+      height: 60px;
+      background: var(--teal);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(13, 115, 119, 0.4);
+      z-index: 9999;
+      border: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: mpd-pulse 2s infinite;
+    }
+    .mpd-chat-bubble:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 20px rgba(13, 115, 119, 0.5);
+    }
+    .mpd-chat-bubble svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--white);
+    }
+    @keyframes mpd-pulse {
+      0%, 100% { box-shadow: 0 4px 12px rgba(13, 115, 119, 0.4); }
+      50% { box-shadow: 0 4px 20px rgba(13, 115, 119, 0.6), 0 0 0 8px rgba(13, 115, 119, 0.1); }
+    }
+
+    .mpd-chat-window {
+      position: fixed;
+      bottom: 96px;
+      right: 24px;
+      width: 380px;
+      height: 520px;
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+      z-index: 9999;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .mpd-chat-window.mpd-open {
+      display: flex;
+    }
+
+    .mpd-chat-header {
+      background: var(--teal);
+      color: var(--white);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .mpd-chat-header-title {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .mpd-chat-close {
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .mpd-chat-close:hover { opacity: 1; }
+
+    .mpd-chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .mpd-chat-messages::-webkit-scrollbar { width: 4px; }
+    .mpd-chat-messages::-webkit-scrollbar-track { background: transparent; }
+    .mpd-chat-messages::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 4px; }
+
+    .mpd-msg {
+      max-width: 82%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+    .mpd-msg-bot {
+      align-self: flex-start;
+      background: var(--gray-100);
+      color: var(--gray-900);
+      border-bottom-left-radius: 4px;
+    }
+    .mpd-msg-user {
+      align-self: flex-end;
+      background: var(--teal);
+      color: var(--white);
+      border-bottom-right-radius: 4px;
+    }
+
+    .mpd-typing {
+      align-self: flex-start;
+      display: none;
+      padding: 10px 14px;
+      background: var(--gray-100);
+      border-radius: 12px;
+      border-bottom-left-radius: 4px;
+      gap: 4px;
+      align-items: center;
+    }
+    .mpd-typing.mpd-visible { display: flex; }
+    .mpd-typing-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--gray-500);
+      border-radius: 50%;
+      animation: mpd-bounce 1.4s infinite ease-in-out both;
+    }
+    .mpd-typing-dot:nth-child(1) { animation-delay: 0s; }
+    .mpd-typing-dot:nth-child(2) { animation-delay: 0.16s; }
+    .mpd-typing-dot:nth-child(3) { animation-delay: 0.32s; }
+    @keyframes mpd-bounce {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    .mpd-chat-input-area {
+      padding: 12px 16px;
+      border-top: 1px solid var(--gray-200);
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+      background: var(--white);
+    }
+    .mpd-chat-input {
+      flex: 1;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+    .mpd-chat-input:focus { border-color: var(--teal); }
+    .mpd-chat-input::placeholder { color: var(--gray-500); }
+    .mpd-chat-send {
+      background: var(--teal);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .mpd-chat-send:hover { background: var(--teal-dark); }
+    .mpd-chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
+    .mpd-chat-send svg { width: 18px; height: 18px; fill: var(--white); }
+
+    @media (max-width: 500px) {
+      .mpd-chat-window {
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+      }
+      .mpd-chat-bubble {
+        bottom: 16px;
+        right: 16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -683,7 +880,7 @@
   <section class="section doctor-section">
     <div class="container">
       <div class="doctor-photo">
-        🩺
+        <img src="dr-browne.png" alt="Dr. Andrew Browne, DDS — Pompano Beach Dentist">
         <div class="credential-badge">
           <strong>University of Maryland</strong><br>School of Dentistry, 2011
         </div>
@@ -860,6 +1057,126 @@
       </div>
     </div>
   </footer>
+
+  <!-- Chat Widget -->
+  <button class="mpd-chat-bubble" id="mpdChatBubble" aria-label="Open chat">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/></svg>
+  </button>
+
+  <div class="mpd-chat-window" id="mpdChatWindow">
+    <div class="mpd-chat-header">
+      <span class="mpd-chat-header-title">Chat with Us</span>
+      <button class="mpd-chat-close" id="mpdChatClose" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="mpd-chat-messages" id="mpdChatMessages">
+      <div class="mpd-msg mpd-msg-bot">Hi there! &#x1F44B; I'm the virtual assistant for My Pompano Dentist. How can I help you today?</div>
+      <div class="mpd-typing" id="mpdTyping">
+        <span class="mpd-typing-dot"></span>
+        <span class="mpd-typing-dot"></span>
+        <span class="mpd-typing-dot"></span>
+      </div>
+    </div>
+    <div class="mpd-chat-input-area">
+      <input type="text" class="mpd-chat-input" id="mpdChatInput" placeholder="Type a message..." autocomplete="off">
+      <button class="mpd-chat-send" id="mpdChatSend" aria-label="Send message">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var bubble = document.getElementById('mpdChatBubble');
+    var chatWindow = document.getElementById('mpdChatWindow');
+    var closeBtn = document.getElementById('mpdChatClose');
+    var input = document.getElementById('mpdChatInput');
+    var sendBtn = document.getElementById('mpdChatSend');
+    var messagesEl = document.getElementById('mpdChatMessages');
+    var typingEl = document.getElementById('mpdTyping');
+
+    var conversationHistory = [];
+    var isWaiting = false;
+
+    bubble.addEventListener('click', function() {
+      chatWindow.classList.add('mpd-open');
+      bubble.style.display = 'none';
+      input.focus();
+    });
+
+    closeBtn.addEventListener('click', function() {
+      chatWindow.classList.remove('mpd-open');
+      bubble.style.display = 'flex';
+    });
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    sendBtn.addEventListener('click', function() {
+      sendMessage();
+    });
+
+    function addMessage(text, role) {
+      var div = document.createElement('div');
+      div.className = 'mpd-msg ' + (role === 'user' ? 'mpd-msg-user' : 'mpd-msg-bot');
+      div.textContent = text;
+      messagesEl.insertBefore(div, typingEl);
+      scrollToBottom();
+    }
+
+    function scrollToBottom() {
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function setWaiting(waiting) {
+      isWaiting = waiting;
+      sendBtn.disabled = waiting;
+      input.disabled = waiting;
+      if (waiting) {
+        typingEl.classList.add('mpd-visible');
+      } else {
+        typingEl.classList.remove('mpd-visible');
+      }
+      scrollToBottom();
+    }
+
+    function sendMessage() {
+      if (isWaiting) return;
+      var text = input.value.trim();
+      if (!text) return;
+
+      addMessage(text, 'user');
+      input.value = '';
+
+      conversationHistory.push({ role: 'user', content: text });
+      setWaiting(true);
+
+      fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: conversationHistory })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        setWaiting(false);
+        if (data.error) {
+          addMessage('Sorry, something went wrong. Please try again or call us at (954) 941-2412.', 'bot');
+        } else {
+          var reply = data.reply || 'Sorry, something went wrong.';
+          conversationHistory.push({ role: 'assistant', content: reply });
+          addMessage(reply, 'bot');
+        }
+      })
+      .catch(function() {
+        setWaiting(false);
+        addMessage('Sorry, something went wrong. Please try again or call us at (954) 941-2412.', 'bot');
+      });
+    }
+  })();
+  </script>
 
 </body>
 </html>
