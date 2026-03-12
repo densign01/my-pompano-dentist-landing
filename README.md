@@ -14,10 +14,25 @@ Deployed on Vercel: [my-pompano-dentist-landing.vercel.app](https://my-pompano-d
 
 ## Chatbot Setup
 
-1. Get an API key from [console.anthropic.com](https://console.anthropic.com/settings/keys)
+The AI chatbot is built but currently disabled (HTML commented out). To enable:
+
+1. Get a fresh API key from [console.anthropic.com](https://console.anthropic.com/settings/keys)
 2. Set it in Vercel: `vercel env add ANTHROPIC_API_KEY production`
-3. Uncomment the chat widget in `website/index.html` (search for "Chat Widget (disabled")
-4. Redeploy: `vercel --prod`
+3. Optionally set `ALLOWED_ORIGIN` env var if using a custom domain
+4. Uncomment the chat widget in `website/index.html` (search for "Chat Widget (disabled")
+5. Uncomment the chat CSS block above `</style>` (search for "Chat Widget (disabled) ──")
+6. Redeploy: `vercel --prod`
+
+The chatbot uses Claude Sonnet 4.5, is pre-loaded with all practice data, and simulates appointment booking with lead capture (name, phone, email, preferred date, reason for visit).
+
+## Security
+
+- CORS locked to Vercel deployment domains only (regex-validated allowlist)
+- Rate limiting: 10 requests/minute per IP on the chat API
+- Input validation: max 50 messages, 2000 chars each, role/content type checked
+- Security headers: HSTS, X-Frame-Options DENY, X-Content-Type-Options nosniff, Referrer-Policy
+- API key stored server-side in Vercel env vars (never exposed to client)
+- All external links use `rel="noopener noreferrer"`
 
 ## Site Optimizations Identified
 
