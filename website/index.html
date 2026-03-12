@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Pompano Dentist | New Patient Special $129 | Dr. Andrew Browne, DDS</title>
+  <meta name="description" content="New patient special $129 — cleaning, exam, x-rays & consultation. Dr. Andrew Browne, DDS in Pompano Beach. 4.8★ Google rating. Call (954) 941-2412.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --teal: #0d7377;
+      --teal-dark: #095c5f;
+      --teal-light: #e6f5f5;
+      --gold: #c9a84c;
+      --gold-light: #f5efd8;
+      --navy: #1a2332;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --white: #ffffff;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--gray-900);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Top Bar ── */
+    .top-bar {
+      background: var(--navy);
+      color: var(--white);
+      padding: 10px 0;
+      font-size: 0.85rem;
+    }
+    .top-bar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .top-bar a { color: var(--gold); text-decoration: none; font-weight: 600; }
+    .top-bar a:hover { text-decoration: underline; }
+    .top-bar .hours { color: var(--gray-200); }
+
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      color: var(--white);
+      padding: 80px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: var(--white);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .hero .container {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      opacity: 0.9;
+      margin-bottom: 32px;
+      max-width: 520px;
+    }
+    .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .btn-gold:hover { background: #b8973f; transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+    .btn-white {
+      background: var(--white);
+      color: var(--teal);
+    }
+    .btn-white:hover { background: var(--gray-100); transform: translateY(-1px); }
+    .btn-teal {
+      background: var(--teal);
+      color: var(--white);
+    }
+    .btn-teal:hover { background: var(--teal-dark); transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+    .btn-outline {
+      background: transparent;
+      color: var(--teal);
+      border: 2px solid var(--teal);
+    }
+    .btn-outline:hover { background: var(--teal); color: var(--white); }
+
+    /* ── Offer Card (Hero) ── */
+    .offer-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px 32px;
+      box-shadow: var(--shadow-xl);
+      color: var(--gray-900);
+      position: relative;
+    }
+    .offer-card .ribbon {
+      position: absolute;
+      top: -12px;
+      left: 24px;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 6px 16px;
+      border-radius: 6px;
+    }
+    .offer-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+      color: var(--teal-dark);
+    }
+    .offer-price {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin: 12px 0 20px;
+    }
+    .offer-price .price {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--teal);
+      line-height: 1;
+    }
+    .offer-price .original {
+      font-size: 1.1rem;
+      color: var(--gray-500);
+      text-decoration: line-through;
+    }
+    .offer-list {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+    .offer-list li {
+      padding: 8px 0;
+      padding-left: 28px;
+      position: relative;
+      font-size: 0.95rem;
+      color: var(--gray-700);
+    }
+    .offer-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--teal);
+      font-weight: 700;
+    }
+    .offer-card .btn { width: 100%; justify-content: center; font-size: 1.05rem; }
+    .offer-bonus {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ── Trust Bar ── */
+    .trust-bar {
+      padding: 40px 0;
+      background: var(--white);
+    }
+    .trust-bar .container {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--gray-700);
+    }
+    .trust-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--teal-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .trust-item strong { color: var(--gray-900); }
+
+    /* ── Section Styles ── */
+    .section { padding: 80px 0; }
+    .section-alt { background: var(--gray-50); }
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+    }
+    .section-header p { color: var(--gray-500); font-size: 1.05rem; }
+    .section-header .accent {
+      display: block;
+      width: 48px;
+      height: 3px;
+      background: var(--gold);
+      margin: 16px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ── Services Grid ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .service-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      transition: all 0.2s;
+    }
+    .service-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+      border-color: var(--teal);
+    }
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--teal-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+    .service-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--gray-900);
+    }
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--gray-500);
+      line-height: 1.5;
+    }
+
+    /* ── Doctor ── */
+    .doctor-section .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .doctor-photo {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, var(--teal-light) 0%, var(--gray-100) 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .doctor-photo .credential-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: var(--white);
+      padding: 10px 16px;
+      border-radius: 8px;
+      box-shadow: var(--shadow-md);
+      font-size: 0.85rem;
+    }
+    .doctor-photo .credential-badge strong { color: var(--teal); }
+    .doctor-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+    .doctor-content .subtitle {
+      color: var(--teal);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .doctor-content p {
+      color: var(--gray-700);
+      margin-bottom: 16px;
+    }
+    .credentials-list {
+      list-style: none;
+      margin: 20px 0 28px;
+    }
+    .credentials-list li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      color: var(--gray-700);
+      font-size: 0.95rem;
+    }
+    .credentials-list li::before {
+      content: '🎓';
+      position: absolute;
+      left: 0;
+      font-size: 0.85rem;
+    }
+
+    /* ── Reviews ── */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .review-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+    }
+    .review-stars { color: var(--gold); font-size: 1.1rem; margin-bottom: 12px; }
+    .review-card blockquote {
+      font-size: 0.95rem;
+      color: var(--gray-700);
+      line-height: 1.65;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .review-avatar {
+      width: 40px;
+      height: 40px;
+      background: var(--teal-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--teal);
+      font-size: 0.9rem;
+    }
+    .review-author .name { font-weight: 600; font-size: 0.9rem; }
+    .review-author .source { font-size: 0.8rem; color: var(--gray-500); }
+
+    /* ── Specials ── */
+    .specials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .special-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 40px 36px;
+      border: 2px solid var(--gray-200);
+      transition: border-color 0.2s;
+      position: relative;
+    }
+    .special-card:hover { border-color: var(--teal); }
+    .special-card .tag {
+      display: inline-block;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    .special-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+    .special-card .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin: 12px 0 20px;
+    }
+    .special-card .price-row .big { font-size: 2.5rem; font-weight: 800; color: var(--teal); }
+    .special-card .price-row .was { text-decoration: line-through; color: var(--gray-500); }
+    .special-card ul {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+    .special-card ul li {
+      padding: 5px 0 5px 24px;
+      position: relative;
+      font-size: 0.9rem;
+      color: var(--gray-700);
+    }
+    .special-card ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    /* ── Languages ── */
+    .languages {
+      background: var(--teal-light);
+      padding: 32px 0;
+      text-align: center;
+    }
+    .languages .container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .lang-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      color: var(--teal-dark);
+    }
+
+    /* ── CTA Banner ── */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--navy) 0%, #253547 100%);
+      color: var(--white);
+      padding: 80px 0;
+      text-align: center;
+    }
+    .cta-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+    }
+    .cta-banner p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-banner .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--navy);
+      color: var(--gray-200);
+      padding: 48px 0 24px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .footer h4 {
+      color: var(--white);
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+    .footer p, .footer li { font-size: 0.9rem; line-height: 1.7; }
+    .footer ul { list-style: none; }
+    .footer a { color: var(--gray-200); text-decoration: none; }
+    .footer a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray-500);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .hero .container { grid-template-columns: 1fr; gap: 40px; }
+      .hero h1 { font-size: 2.4rem; }
+      .hero { padding: 60px 0 80px; }
+      .doctor-section .container { grid-template-columns: 1fr; gap: 40px; }
+      .specials-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .trust-bar .container { gap: 24px; }
+      .section { padding: 60px 0; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .hero-ctas { flex-direction: column; }
+      .offer-card { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <span class="hours">Mon–Thu: 8AM–5PM &nbsp;|&nbsp; Fri: 8AM–12PM</span>
+      <a href="tel:9549412412">(954) 941-2412 — Call Now</a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-text">
+        <div class="hero-badge">★ 4.8 Rating on Google &nbsp;•&nbsp; 50+ Reviews</div>
+        <h1>Your Smile Deserves Pompano Beach's Best</h1>
+        <p>Dr. Andrew Browne and his team deliver gentle, expert dental care — from routine cleanings to full-mouth transformations. New patients welcome.</p>
+        <div class="hero-ctas">
+          <a href="tel:9549412412" class="btn btn-gold">📞 Call (954) 941-2412</a>
+          <a href="#specials" class="btn btn-white">View Specials</a>
+        </div>
+      </div>
+
+      <div class="offer-card">
+        <div class="ribbon">New Patient Special</div>
+        <h3>Welcome Package</h3>
+        <div class="offer-price">
+          <span class="price">$129</span>
+          <span class="original">$450+ value</span>
+        </div>
+        <ul class="offer-list">
+          <li>Professional cleaning</li>
+          <li>Comprehensive exam</li>
+          <li>Full series of x-rays</li>
+          <li>Personalized consultation</li>
+        </ul>
+        <a href="tel:9549412412" class="btn btn-teal">Schedule Your Visit</a>
+        <div class="offer-bonus">+ 15% off future treatment when you book today</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-item">
+        <div class="trust-icon">🦷</div>
+        <div><strong>15+ Years</strong><br>of Experience</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🌎</div>
+        <div><strong>3 Languages</strong><br>EN · PT · ES</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">💳</div>
+        <div><strong>Financing</strong><br>CareCredit &amp; Cherry</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">⭐</div>
+        <div><strong>4.8 Stars</strong><br>Google Reviews</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Comprehensive Dental Care</h2>
+        <p>From preventive cleanings to advanced reconstructive work — everything under one roof.</p>
+        <span class="accent"></span>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">✨</div>
+          <h3>Cosmetic Dentistry</h3>
+          <p>Veneers, bonding, and whitening to give you the smile you've always wanted.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔩</div>
+          <h3>Dental Implants</h3>
+          <p>Permanent, natural-looking replacements for missing teeth — including All-on-4.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">😁</div>
+          <h3>Invisalign</h3>
+          <p>Straighten your teeth discreetly with clear, comfortable aligners.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🛡️</div>
+          <h3>General Dentistry</h3>
+          <p>Cleanings, fillings, extractions, and root canals — the foundation of oral health.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🚨</div>
+          <h3>Emergency Dentist</h3>
+          <p>Urgent dental care when you need it. Same-day appointments available.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔬</div>
+          <h3>Reconstructive</h3>
+          <p>Full-mouth rehabilitation to restore function, comfort, and confidence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Doctor -->
+  <section class="section doctor-section">
+    <div class="container">
+      <div class="doctor-photo">
+        🩺
+        <div class="credential-badge">
+          <strong>University of Maryland</strong><br>School of Dentistry, 2011
+        </div>
+      </div>
+      <div class="doctor-content">
+        <h2>Dr. Andrew Browne, DDS</h2>
+        <p class="subtitle">Cosmetic, Reconstructive &amp; Implant Dentistry</p>
+        <p>Dr. Browne treats every patient like family. His conservative, minimally invasive approach means less time in the chair and better long-term results. He's restored hundreds of smiles across South Florida with veneers, crowns, and dental implants.</p>
+        <ul class="credentials-list">
+          <li>B.S. Biopsychology — University of Michigan, 2007</li>
+          <li>DDS — University of Maryland School of Dentistry, 2011</li>
+          <li>15+ years cosmetic &amp; implant experience</li>
+        </ul>
+        <a href="tel:9549412412" class="btn btn-outline">Meet Dr. Browne</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>What Patients Are Saying</h2>
+        <p>Real reviews from real patients — 4.8 out of 5 stars on Google.</p>
+        <span class="accent"></span>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <blockquote>"Dr. Browne and his staff have been terrific. Having extensive work done, I would definitely recommend highly."</blockquote>
+          <div class="review-author">
+            <div class="review-avatar">TP</div>
+            <div>
+              <div class="name">Tom P.</div>
+              <div class="source">Google Review</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <blockquote>"Best office! Hygienist is fast, efficient, gentle. Never have to wait. Staff is always friendly and professional."</blockquote>
+          <div class="review-author">
+            <div class="review-avatar">SB</div>
+            <div>
+              <div class="name">Steve B.</div>
+              <div class="source">Google Review</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <blockquote>"Dr. Browne gave me the most gentle tooth extraction I've ever had. The staff was wonderful and caring."</blockquote>
+          <div class="review-author">
+            <div class="review-avatar">DR</div>
+            <div>
+              <div class="name">Doug R.</div>
+              <div class="source">Google Review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specials -->
+  <section class="section" id="specials">
+    <div class="container">
+      <div class="section-header">
+        <h2>New Patient Specials</h2>
+        <p>We make it easy and affordable to get started with your dental care.</p>
+        <span class="accent"></span>
+      </div>
+      <div class="specials-grid">
+        <div class="special-card">
+          <div class="tag">Most Popular</div>
+          <h3>Welcome Package</h3>
+          <div class="price-row">
+            <span class="big">$129</span>
+            <span class="was">$450+ value</span>
+          </div>
+          <ul>
+            <li>Professional cleaning</li>
+            <li>Comprehensive exam</li>
+            <li>Full series of x-rays</li>
+            <li>Personalized consultation</li>
+            <li>15% off future treatment</li>
+          </ul>
+          <a href="tel:9549412412" class="btn btn-teal">Book Cleaning</a>
+        </div>
+        <div class="special-card">
+          <div class="tag">Urgent Care</div>
+          <h3>Emergency Visit</h3>
+          <div class="price-row">
+            <span class="big">$99</span>
+            <span class="was">$300+ value</span>
+          </div>
+          <ul>
+            <li>Full series of x-rays</li>
+            <li>Limited examination</li>
+            <li>Same-day availability</li>
+            <li>Treatment plan included</li>
+            <li>15% off future treatment</li>
+          </ul>
+          <a href="tel:9549412412" class="btn btn-teal">Book Emergency Visit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Languages -->
+  <div class="languages">
+    <div class="container">
+      <div class="lang-item">🇺🇸 English</div>
+      <div class="lang-item">🇧🇷 Português</div>
+      <div class="lang-item">🇪🇸 Español</div>
+    </div>
+  </div>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Ready for a Healthier Smile?</h2>
+      <p>New patients start at just $129. Call today or request an appointment online.</p>
+      <div class="btn-group">
+        <a href="tel:9549412412" class="btn btn-gold">📞 (954) 941-2412</a>
+        <a href="https://www.mypompanodentist.com/appointment-request/" class="btn btn-white" target="_blank">Request Appointment</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>My Pompano Dentist</h4>
+          <p>2700 NE 14th Street Causeway, Suite #105<br>Pompano Beach, FL 33062</p>
+          <p style="margin-top: 12px;">
+            <strong>Hours:</strong><br>
+            Mon–Thu: 8:00 AM – 5:00 PM<br>
+            Fri: 8:00 AM – 12:00 PM<br>
+            Sat–Sun: Closed<br>
+            <em>Weekend appointments by request</em>
+          </p>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <ul>
+            <li>Cosmetic Dentistry</li>
+            <li>Dental Implants</li>
+            <li>Invisalign</li>
+            <li>Emergency Dentist</li>
+            <li>General Dentistry</li>
+            <li>All-on-4</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:9549412412">(954) 941-2412</a></li>
+            <li><a href="https://www.mypompanodentist.com/appointment-request/" target="_blank">Request Appointment</a></li>
+            <li><a href="https://pay.balancecollect.com/m/mypompanodentist" target="_blank">Pay Your Bill</a></li>
+          </ul>
+          <h4 style="margin-top: 20px;">Follow Us</h4>
+          <ul>
+            <li><a href="https://www.facebook.com/MyPompanoDentistFL/" target="_blank">Facebook</a></li>
+            <li><a href="https://www.instagram.com/mypompanodentist/" target="_blank">Instagram</a></li>
+            <li><a href="https://www.youtube.com/@andrewbrownedds" target="_blank">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 My Pompano Dentist. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
